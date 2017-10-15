@@ -19,7 +19,7 @@ jobs:
            command: |
              . venv/bin/activate
              make zip
-             aws s3 sync dist s3://secureletter-app/
+             aws s3 cp dist/secureletter.zip s3://secureletter-app/
 
        - store_artifacts:
            path: dist/secureletter.zip
