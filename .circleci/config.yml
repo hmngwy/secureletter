@@ -68,6 +68,24 @@ jobs:
                --capabilities CAPABILITY_IAM
              #aws cloudformation wait stack-update-complete --stack-name $STACK_NAME
 
+   deploy:
+     <<: *defaults
+     steps:
+       - run:
+           name: Prepare
+           command: |
+             sudo apt-get update && sudo apt-get install -y awscli
+
+       - run:
+           name: Update Cloudformation Stack
+           command: |
+             aws cloudformation update-stack \
+               --stack-name $STACK_NAME \
+               --region $AWS_DEFAULT_REGION \
+               --template-url https://s3-$AWS_DEFAULT_REGION.amazonaws.com/$S3_BUCKET/cloudformation_stack.yaml \
+               --capabilities CAPABILITY_IAM
+             #aws cloudformation wait stack-update-complete --stack-name $STACK_NAME
+
 workflows:
   version: 2
   build_and_upload:
@@ -76,4 +94,9 @@ workflows:
       - upload:
           requires:
             - build
-
+      - deploy:
+          requires:
+            - upload
+          filters:
+            branches:
+              only: master
