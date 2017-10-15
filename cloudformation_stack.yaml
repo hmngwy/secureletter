@@ -524,7 +524,7 @@ Resources:
                 -
                   - "arn:aws:s3:::"
                   -
-                    Ref: "myExampleBucket"
+                    Ref: "letters"
                   - "/*"
             Principal:
               Service: ses.amazonaws.com
