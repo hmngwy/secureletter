@@ -36,6 +36,9 @@ jobs:
              - venv
        - persist_to_workspace:
            root: /home/circleci/project
+           paths:
+             - dist/secureletter-0.0.1.zip
+             - cloudformation_stack.yaml
 
    upload:
      <<: *defaults
