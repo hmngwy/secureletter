@@ -514,11 +514,12 @@ Resources:
       Bucket: !Ref letters
       PolicyDocument:
         Statement:
-          Action:
-            - 's3:PutObject'
-          Effect: Allow
-          Principal:
-            Service: ses.amazonaws.com
+          -
+            Action:
+              - 's3:PutObject'
+            Effect: Allow
+            Principal:
+              Service: ses.amazonaws.com
     Metadata:
       'AWS::CloudFormation::Designer':
         id: f1f9a62e-6d71-4769-b784-3752f6d3989f
