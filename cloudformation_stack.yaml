@@ -1,0 +1,489 @@
+AWSTemplateFormatVersion: 2010-09-09
+Metadata:
+  'AWS::CloudFormation::Designer':
+    f95ee99c-b3de-4e85-bfd7-2036bcb9ed4c:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 150
+        'y': 51
+      z: 0
+    3746c1fd-6b1c-44c4-802f-91a39ad5a820:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 250
+        'y': 50
+      z: 0
+      embeds: []
+    3e593bcb-703e-44f8-a34e-e10f0eb9427b:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 100
+        'y': 50
+      z: 0
+      embeds: []
+      dependson:
+        - 3746c1fd-6b1c-44c4-802f-91a39ad5a820
+    4361ca13-dc63-491e-9e85-8bbf4ea3a1c6:
+      source:
+        id: 3e593bcb-703e-44f8-a34e-e10f0eb9427b
+      target:
+        id: 3746c1fd-6b1c-44c4-802f-91a39ad5a820
+      z: 1
+    0c923395-a230-4868-b898-a4c5eb15ec4d:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 80
+        'y': 250
+      z: 0
+      embeds: []
+      isrelatedto:
+        - 78a77554-3086-4ec2-9669-530a8d4142a0
+    951b56ec-5949-4635-bbe8-f39ac7ba9eea:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 160
+        'y': 250
+      z: 0
+      embeds: []
+      isrelatedto:
+        - 78a77554-3086-4ec2-9669-530a8d4142a0
+    6675595d-5b9c-419e-a1bc-36c9d6f963c9:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 240
+        'y': 250
+      z: 0
+      embeds: []
+      isrelatedto:
+        - 78a77554-3086-4ec2-9669-530a8d4142a0
+    c372d324-2252-41d3-b28e-02e0622079eb:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 320
+        'y': 250
+      z: 0
+      embeds: []
+      dependson:
+        - 49c91f71-f848-4e61-a672-a4ffee895499
+      isrelatedto:
+        - 78a77554-3086-4ec2-9669-530a8d4142a0
+    452aee17-84a6-4d6b-bc6e-d5c1ebead8d4:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 80
+        'y': 490
+      z: 0
+      embeds: []
+    d49d8fd2-aa77-40f3-a66a-4c0236f0b556:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 160
+        'y': 490
+      z: 0
+      embeds: []
+    a8a91a9e-c007-4cf3-b347-354828389d99:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 240
+        'y': 490
+      z: 0
+      embeds: []
+    1cb8fa61-eb3e-498a-a7fd-2b2bd14186d5:
+      source:
+        id: 0c923395-a230-4868-b898-a4c5eb15ec4d
+      target:
+        id: 452aee17-84a6-4d6b-bc6e-d5c1ebead8d4
+      z: 11
+    fac6e8a5-c54e-427f-a53d-1435b58eed41:
+      source:
+        id: 951b56ec-5949-4635-bbe8-f39ac7ba9eea
+      target:
+        id: d49d8fd2-aa77-40f3-a66a-4c0236f0b556
+      z: 12
+    16962038-2606-4dc8-89a6-3034555e87b0:
+      source:
+        id: 6675595d-5b9c-419e-a1bc-36c9d6f963c9
+      target:
+        id: a8a91a9e-c007-4cf3-b347-354828389d99
+      z: 13
+    49c91f71-f848-4e61-a672-a4ffee895499:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 440
+        'y': 250
+      z: 0
+      embeds: []
+    1d276304-f653-47c2-bef0-db7a157553a8:
+      source:
+        id: c372d324-2252-41d3-b28e-02e0622079eb
+      target:
+        id: 49c91f71-f848-4e61-a672-a4ffee895499
+      z: 11
+    78a77554-3086-4ec2-9669-530a8d4142a0:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 200
+        'y': 140
+      z: 0
+      embeds: []
+    dfd764aa-bfef-451b-a9ea-f77d536ee12a:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 70
+        'y': 380
+      z: 0
+      embeds: []
+      dependson:
+        - 452aee17-84a6-4d6b-bc6e-d5c1ebead8d4
+        - 0c923395-a230-4868-b898-a4c5eb15ec4d
+      isrelatedto:
+        - 0c923395-a230-4868-b898-a4c5eb15ec4d
+        - 452aee17-84a6-4d6b-bc6e-d5c1ebead8d4
+    e6a3bb01-6f7d-4fee-9f8d-c903399a0ea9:
+      source:
+        id: dfd764aa-bfef-451b-a9ea-f77d536ee12a
+      target:
+        id: 452aee17-84a6-4d6b-bc6e-d5c1ebead8d4
+      z: 11
+    7306e464-8474-499e-b2fb-a35e1d267dbe:
+      source:
+        id: dfd764aa-bfef-451b-a9ea-f77d536ee12a
+      target:
+        id: 0c923395-a230-4868-b898-a4c5eb15ec4d
+      z: 12
+    48348010-ba7e-4056-a51a-0ae3d5ba1fcc:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 160
+        'y': 380
+      z: 0
+      embeds: []
+      dependson:
+        - 951b56ec-5949-4635-bbe8-f39ac7ba9eea
+        - d49d8fd2-aa77-40f3-a66a-4c0236f0b556
+      isrelatedto:
+        - 951b56ec-5949-4635-bbe8-f39ac7ba9eea
+        - d49d8fd2-aa77-40f3-a66a-4c0236f0b556
+    f6c4c632-89ed-4356-8a1c-3405a533c17c:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 250
+        'y': 380
+      z: 0
+      embeds: []
+      dependson:
+        - 6675595d-5b9c-419e-a1bc-36c9d6f963c9
+        - a8a91a9e-c007-4cf3-b347-354828389d99
+      isrelatedto:
+        - 6675595d-5b9c-419e-a1bc-36c9d6f963c9
+        - a8a91a9e-c007-4cf3-b347-354828389d99
+        - d49d8fd2-aa77-40f3-a66a-4c0236f0b556
+    d1ea12ce-f21e-4884-ba00-9a1a3e098bb9:
+      source:
+        id: 48348010-ba7e-4056-a51a-0ae3d5ba1fcc
+      target:
+        id: 951b56ec-5949-4635-bbe8-f39ac7ba9eea
+      z: 11
+    3a9df0bb-c6a2-4f71-a4b4-c9c653e31d09:
+      source:
+        id: 48348010-ba7e-4056-a51a-0ae3d5ba1fcc
+      target:
+        id: d49d8fd2-aa77-40f3-a66a-4c0236f0b556
+      z: 12
+    961edf87-1d6e-4458-b5c4-4ab26a7ef2c0:
+      source:
+        id: f6c4c632-89ed-4356-8a1c-3405a533c17c
+      target:
+        id: 6675595d-5b9c-419e-a1bc-36c9d6f963c9
+      z: 13
+    d2d4efae-50c2-4420-a6b1-25e79cc16de2:
+      source:
+        id: f6c4c632-89ed-4356-8a1c-3405a533c17c
+      target:
+        id: a8a91a9e-c007-4cf3-b347-354828389d99
+      z: 14
+Resources:
+  newslettersTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: fingerprint
+          AttributeType: S
+        - AttributeName: email
+          AttributeType: S
+      KeySchema:
+        - AttributeName: fingerprint
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: '1'
+        WriteCapacityUnits: '1'
+      TableName: newsletters
+      GlobalSecondaryIndexes:
+        - IndexName: email-index
+          KeySchema:
+            - AttributeName: email
+              KeyType: HASH
+          ProvisionedThroughput:
+            ReadCapacityUnits: '1'
+            WriteCapacityUnits: '1'
+          Projection:
+            ProjectionType: KEYS_ONLY
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 3746c1fd-6b1c-44c4-802f-91a39ad5a820
+  subscribersTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: pair
+          AttributeType: S
+        - AttributeName: email
+          AttributeType: S
+        - AttributeName: newsletter_key
+          AttributeType: S
+      KeySchema:
+        - AttributeName: pair
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: '1'
+        WriteCapacityUnits: '1'
+      TableName: subscribers
+      GlobalSecondaryIndexes:
+        - IndexName: email-index
+          KeySchema:
+            - AttributeName: email
+              KeyType: HASH
+          ProvisionedThroughput:
+            ReadCapacityUnits: '1'
+            WriteCapacityUnits: '1'
+          Projection:
+            ProjectionType: KEYS_ONLY
+        - IndexName: newsletter_key-index
+          KeySchema:
+            - AttributeName: newsletter_key
+              KeyType: HASH
+          ProvisionedThroughput:
+            ReadCapacityUnits: '1'
+            WriteCapacityUnits: '1'
+          Projection:
+            ProjectionType: KEYS_ONLY
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 3e593bcb-703e-44f8-a34e-e10f0eb9427b
+    DependsOn:
+      - newslettersTable
+  registerFn:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      Handler: methods.register
+      Role:
+        'Fn::GetAtt':
+          - lambdaExecRole
+          - Arn
+      Code:
+        S3Bucket:
+          Ref: CodeSourceBucket
+        S3Key: secureletter.zip
+      Runtime: python3.6
+      Timeout: '25'
+      TracingConfig:
+        Mode: Active
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 0c923395-a230-4868-b898-a4c5eb15ec4d
+  subscribeFn:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      Handler: methods.subscribe
+      Role:
+        'Fn::GetAtt':
+          - lambdaExecRole
+          - Arn
+      Code:
+        S3Bucket:
+          Ref: CodeSourceBucket
+        S3Key: secureletter.zip
+      Runtime: python3.6
+      Timeout: '25'
+      TracingConfig:
+        Mode: Active
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 951b56ec-5949-4635-bbe8-f39ac7ba9eea
+  unsubscribeFn:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      Handler: methods.unsubscribe
+      Role:
+        'Fn::GetAtt':
+          - lambdaExecRole
+          - Arn
+      Code:
+        S3Bucket:
+          Ref: CodeSourceBucket
+        S3Key: secureletter.zip
+      Runtime: python3.6
+      Timeout: '25'
+      TracingConfig:
+        Mode: Active
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 6675595d-5b9c-419e-a1bc-36c9d6f963c9
+  publishFn:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      Handler: methods.publish
+      Role:
+        'Fn::GetAtt':
+          - lambdaExecRole
+          - Arn
+      Code:
+        S3Bucket:
+          Ref: CodeSourceBucket
+        S3Key: secureletter.zip
+      Runtime: python3.6
+      Timeout: '25'
+      TracingConfig:
+        Mode: Active
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: c372d324-2252-41d3-b28e-02e0622079eb
+    DependsOn:
+      - letters
+  registerSESProxy:
+    Type: 'AWS::SNS::Topic'
+    Properties: {}
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 452aee17-84a6-4d6b-bc6e-d5c1ebead8d4
+  subscribeSESProxy:
+    Type: 'AWS::SNS::Topic'
+    Properties: {}
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: d49d8fd2-aa77-40f3-a66a-4c0236f0b556
+  unsubscribeSESProxy:
+    Type: 'AWS::SNS::Topic'
+    Properties: {}
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: a8a91a9e-c007-4cf3-b347-354828389d99
+  letters:
+    Type: 'AWS::S3::Bucket'
+    Properties: {}
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 49c91f71-f848-4e61-a672-a4ffee895499
+  lambdaExecRole:
+    Type: 'AWS::IAM::Role'
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 78a77554-3086-4ec2-9669-530a8d4142a0
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Path: /
+      Policies:
+        - PolicyName: S3FullAccess
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: 's3:*'
+                Resource: '*'
+        - PolicyName: XrayFullAccess
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: 'xray:*'
+                Resource: '*'
+  registerSnsSub:
+    Type: 'AWS::SNS::Subscription'
+    Properties:
+      Protocol: lambda
+      Endpoint:
+        'Fn::GetAtt':
+          - registerFn
+          - Arn
+      TopicArn:
+        Ref: registerSESProxy
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: dfd764aa-bfef-451b-a9ea-f77d536ee12a
+    DependsOn:
+      - registerSESProxy
+      - registerFn
+  subscribeSnsSub:
+    Type: 'AWS::SNS::Subscription'
+    Properties:
+      Protocol: lambda
+      Endpoint:
+        'Fn::GetAtt':
+          - subscribeFn
+          - Arn
+      TopicArn:
+        Ref: subscribeSESProxy
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 48348010-ba7e-4056-a51a-0ae3d5ba1fcc
+    DependsOn:
+      - subscribeFn
+      - subscribeSESProxy
+  unsubscribeSnsSub:
+    Type: 'AWS::SNS::Subscription'
+    Properties:
+      Protocol: lambda
+      Endpoint:
+        'Fn::GetAtt':
+          - unsubscribeFn
+          - Arn
+      TopicArn:
+        Ref: unsubscribeSESProxy
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: f6c4c632-89ed-4356-8a1c-3405a533c17c
+    DependsOn:
+      - unsubscribeFn
+      - unsubscribeSESProxy
+Parameters:
+  CodeSourceBucket:
+    Type: String
+    Default: secureletter-app
