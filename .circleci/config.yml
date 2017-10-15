@@ -1,7 +1,6 @@
 defaults: &defaults
   docker:
     - image: circleci/python:3.6.1
-  working_directory: /tmp
 
 version: 2
 jobs:
@@ -43,7 +42,7 @@ jobs:
      steps:
        - attach_workspace:
           # Must be absolute path or relative path from working_directory
-          at: /tmp/project
+          at: project
 
        - run:
            name: Prepare
