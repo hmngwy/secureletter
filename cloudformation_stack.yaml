@@ -400,7 +400,15 @@ Resources:
         id: a8a91a9e-c007-4cf3-b347-354828389d99
   letters:
     Type: 'AWS::S3::Bucket'
-    Properties: {}
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action:
+              - 's3:PutObject'
+            Effect: Allow
+            Principal:
+              Service:
+                - ses.amazonaws.com
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 49c91f71-f848-4e61-a672-a4ffee895499
