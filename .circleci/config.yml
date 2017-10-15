@@ -1,0 +1,28 @@
+version: 2
+jobs:
+   build:
+     docker:
+       - image: circleci/python:3.6.1
+     steps:
+       - checkout
+
+       - run:
+           command: |
+             pip install pipenv
+             pip install awscli
+             python3 -m venv venv
+             . venv/bin/activate
+             pipenv install
+
+       - run:
+           command: |
+             mkdir build
+             cp methods.py build/
+             cp -R venv/lib/python3.6/site-packages/* build/
+             cd build
+             zip -r secureletter.zip .
+             aws s3 sync . s3://secureletter-app.us-west-2.amazonaws.com
+
+       - store_artifacts:
+           path: build/
+           destination: bld
