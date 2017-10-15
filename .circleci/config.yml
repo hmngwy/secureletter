@@ -1,33 +1,25 @@
 version: 2
 jobs:
-  build:
-    docker:
-      - image: circleci/python:3.6.1
-    steps:
-      - checkout
-
-      - run:
-          name: Prepare
-          command: |
-            sudo apt-get update && sudo apt-get install -y awscli
-            export PATH="$HOME/.local/bin:$PATH"
-            pip install --user pipenv
-            python3 -m venv venv
-            . venv/bin/activate
-            pipenv install
+   build:
+     docker:
+       - image: circleci/python:3.6.1
+     steps:
+       - checkout
 
        - run:
-           name: Build Zip
            command: |
-             mkdir build
-             mkdir dist
-             cp methods.py build/
-             cp -R venv/lib/python3.6/site-packages/* build/
-             cd build; zip -r ../dist/secureletter.zip .
+             sudo apt-get update && sudo apt-get install -y awscli
+             export PATH="$HOME/.local/bin:$PATH"
+             pip install --user pipenv
+             python3 -m venv venv
+             . venv/bin/activate
+             pipenv install
 
        - run:
            name: Deploy Zip to S3
            command: |
+             . venv/bin/activate
+             make zip
              aws s3 cp dist/secureletter.zip s3://secureletter-app/
 
        - store_artifacts:
