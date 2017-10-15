@@ -41,6 +41,3 @@ jobs:
                --capabilities CAPABILITY_IAM
              #aws cloudformation wait stack-update-complete --stack-name $STACK_NAME
 
-       - store_artifacts:
-           path: dist/secureletter.zip
-           destination: dist
