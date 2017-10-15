@@ -19,7 +19,7 @@ jobs:
            command: |
              . venv/bin/activate
              make zip
-             make deploy
+             aws s3 sync build/secureletter.zip s3://secureletter-app.us-west-2.amazonaws.com
 
        - store_artifacts:
            path: build/
