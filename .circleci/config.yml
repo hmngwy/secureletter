@@ -26,12 +26,12 @@ jobs:
              mkdir dist
              cp methods.py build/
              cp -R venv/lib/python3.6/site-packages/* build/
-             cd build; zip -r ../dist/secureletter-0.0.0.zip .
+             cd build; zip -r ../dist/secureletter-0.0.1.zip .
 
        - run:
            name: Deploy Zip to S3
            command: |
-             aws s3 cp dist/secureletter-0.0.0.zip s3://secureletter-app/
+             aws s3 cp dist/secureletter-0.0.1.zip s3://secureletter-app/
 
        - run:
            name: Update Cloudformation Stack
