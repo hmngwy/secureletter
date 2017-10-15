@@ -3,45 +3,45 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.1
-     steps:
-       - checkout
+    steps:
+      - checkout
 
-       - run:
-           name: Prepare
-           command: |
-             sudo apt-get update && sudo apt-get install -y awscli
-             export PATH="$HOME/.local/bin:$PATH"
-             pip install --user pipenv
-             python3 -m venv venv
-             . venv/bin/activate
-             pipenv install
+      - run:
+         name: Prepare
+         command: |
+           sudo apt-get update && sudo apt-get install -y awscli
+           export PATH="$HOME/.local/bin:$PATH"
+           pip install --user pipenv
+           python3 -m venv venv
+           . venv/bin/activate
+           pipenv install
 
-       - run:
-          name: Build Zip
-          command: |
-            mkdir build
-            mkdir dist
-            cp methods.py build/
-            cp -R venv/lib/python3.6/site-packages/* build/
-            cd build; zip -r ../dist/secureletter.zip .
+      - run:
+         name: Build Zip
+         command: |
+           mkdir build
+           mkdir dist
+           cp methods.py build/
+           cp -R venv/lib/python3.6/site-packages/* build/
+           cd build; zip -r ../dist/secureletter.zip .
 
-       - run:
-          name: Deploy Zip to S3
-          command: |
-            aws s3 cp dist/secureletter.zip s3://secureletter-app/
+      - run:
+         name: Deploy Zip to S3
+         command: |
+           aws s3 cp dist/secureletter.zip s3://secureletter-app/
 
-       - run:
-          name: Deploy Cloudformation Template and Update
-          command: |
-            aws s3 cp cloudformation_stack.yaml s3://secureletter-app/
-            aws cloudformation update-stack \
-                --stack-name $STACK_NAME \
-                --region $AWS_DEFAULT_REGION \
-                --template-url https://s3-$AWS_DEFAULT_REGION.amazonaws.com/$S3_BUCKET/cloudformation_stack.yaml \
-                --capabilities CAPABILITY_IAM
-            aws cloudformation wait stack-update-complete --stack-name $STACK_NAME
-            echo 'Done'
+      - run:
+         name: Deploy Cloudformation Template and Update
+         command: |
+           aws s3 cp cloudformation_stack.yaml s3://secureletter-app/
+           aws cloudformation update-stack \
+               --stack-name $STACK_NAME \
+               --region $AWS_DEFAULT_REGION \
+               --template-url https://s3-$AWS_DEFAULT_REGION.amazonaws.com/$S3_BUCKET/cloudformation_stack.yaml \
+               --capabilities CAPABILITY_IAM
+           aws cloudformation wait stack-update-complete --stack-name $STACK_NAME
+           echo 'Done'
 
-       - store_artifacts:
-           path: dist/secureletter.zip
-           destination: dist
+      - store_artifacts:
+          path: dist/secureletter.zip
+          destination: dist
