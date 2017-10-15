@@ -6,9 +6,6 @@ jobs:
      steps:
        - checkout
 
-       - restore_cache:
-           key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-
        - run:
            name: Prepare
            command: |
@@ -44,11 +41,6 @@ jobs:
                --capabilities CAPABILITY_IAM
              aws cloudformation wait stack-update-complete --stack-name $STACK_NAME
 
-      - save_cache:
-           key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-           paths:
-             - "venv"
-
        - store_artifacts:
-           path: dist/
+           path: dist/secureletter.zip
            destination: dist
