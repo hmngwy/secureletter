@@ -54,7 +54,7 @@ def unsubscribe(event, context):
 
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('subscribers')
-    response = table.delete_item(
+    table.delete_item(
         Key={'pair': parseaddr(msg['From'])[
             1] + '-' + msg['Subject'].replace(' ', '')}
     )
@@ -207,9 +207,6 @@ def register(event, context):
         if response['Count']:
             return 'ALREADY_REGISTERED'
 
-        # TODO save plain email as index/key
-        # Such that on publish, we verify signature with
-        # fingerprint on file queried by email
         table.put_item(
             Item={
                 'fingerprint': verified.fingerprint,
