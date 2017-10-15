@@ -38,9 +38,6 @@ jobs:
                 --stack-name $STACK_NAME \
                 --region $AWS_DEFAULT_REGION \
                 --template-url https://s3-$AWS_DEFAULT_REGION.amazonaws.com/$S3_BUCKET/cloudformation_stack.yaml \
-                --parameters ParameterKey=TemplateBucketName,ParameterValue=$S3_BUCKET \
-                             ParameterKey=DeployTimestamp,ParameterValue=$TIMESTAMP \
-                             ParameterKey=WebAppPermittedIPAddress,ParameterValue=$WEBAPP_PERMITTED_IP_ADDRESS \
                 --capabilities CAPABILITY_IAM
             aws cloudformation wait stack-update-complete --stack-name $STACK_NAME
             echo 'Done'
