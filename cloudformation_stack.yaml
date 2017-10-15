@@ -232,6 +232,31 @@ Metadata:
       target:
         id: a8a91a9e-c007-4cf3-b347-354828389d99
       z: 14
+    f1f9a62e-6d71-4769-b784-3752f6d3989f:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 544.6344775829374
+        'y': 299.9423725255016
+      z: 0
+      embeds: []
+      isassociatedwith:
+        - 49c91f71-f848-4e61-a672-a4ffee895499
+      dependson:
+        - 49c91f71-f848-4e61-a672-a4ffee895499
+    485e2a1e-a173-40dc-967d-dda094a7c082:
+      source:
+        id: f1f9a62e-6d71-4769-b784-3752f6d3989f
+      target:
+        id: 49c91f71-f848-4e61-a672-a4ffee895499
+      z: 11
+    41708e08-0ce4-4c38-a9d1-fd46debc18ca:
+      source:
+        id: f1f9a62e-6d71-4769-b784-3752f6d3989f
+      target:
+        id: 49c91f71-f848-4e61-a672-a4ffee895499
+      z: 12
 Resources:
   newslettersTable:
     Type: 'AWS::DynamoDB::Table'
@@ -400,15 +425,7 @@ Resources:
         id: a8a91a9e-c007-4cf3-b347-354828389d99
   letters:
     Type: 'AWS::S3::Bucket'
-    Properties:
-      PolicyDocument:
-        Statement:
-          - Action:
-              - 's3:PutObject'
-            Effect: Allow
-            Principal:
-              Service:
-                - ses.amazonaws.com
+    Properties: {}
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 49c91f71-f848-4e61-a672-a4ffee895499
@@ -491,7 +508,24 @@ Resources:
     DependsOn:
       - unsubscribeFn
       - unsubscribeSESProxy
+  allowSesPuts:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      Bucket: !Ref letters
+      PolicyDocument:
+        Statement:
+          Action:
+            - 's3:PutObject'
+          Effect: Allow
+          Principal:
+            Service: ses.amazonaws.com
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: f1f9a62e-6d71-4769-b784-3752f6d3989f
+    DependsOn:
+      - letters
 Parameters:
   CodeSourceBucket:
     Type: String
     Default: secureletter-app
+
