@@ -8,6 +8,7 @@ name = "pypi"
 "python-lambda-local" = "*"
 pylint = "*"
 "boto3" = "*"
+bumpversion = "*"
 
 
 
@@ -15,6 +16,7 @@ pylint = "*"
 
 [packages]
 "python-gnupg" = "*"
+
 
 
 
