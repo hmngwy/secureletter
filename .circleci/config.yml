@@ -35,14 +35,14 @@ jobs:
            paths:
              - venv
        - persist_to_workspace:
-           root: project
+           root: /home/circleci/project
 
    upload:
      <<: *defaults
      steps:
        - attach_workspace:
           # Must be absolute path or relative path from working_directory
-          at: project
+          at: /home/circleci/project
 
        - run:
            name: Prepare
