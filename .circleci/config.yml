@@ -39,7 +39,7 @@ jobs:
                --region $AWS_DEFAULT_REGION \
                --template-url https://s3-$AWS_DEFAULT_REGION.amazonaws.com/$S3_BUCKET/cloudformation_stack.yaml \
                --capabilities CAPABILITY_IAM
-             aws cloudformation wait stack-update-complete --stack-name $STACK_NAME
+             #aws cloudformation wait stack-update-complete --stack-name $STACK_NAME
 
        - store_artifacts:
            path: dist/secureletter.zip
