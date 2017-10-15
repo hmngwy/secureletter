@@ -257,6 +257,23 @@ Metadata:
       target:
         id: 49c91f71-f848-4e61-a672-a4ffee895499
       z: 12
+    565ed0c9-b227-4266-ab09-52d9993b10bd:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 356.72118017201564
+        'y': 377.40215160049615
+      z: 0
+      embeds: []
+      isassociatedwith:
+        - c372d324-2252-41d3-b28e-02e0622079eb
+    2dabcb1f-e833-4817-b5bb-2b9a5265b739:
+      source:
+        id: 565ed0c9-b227-4266-ab09-52d9993b10bd
+      target:
+        id: c372d324-2252-41d3-b28e-02e0622079eb
+      z: 11
 Resources:
   newslettersTable:
     Type: 'AWS::DynamoDB::Table'
@@ -514,18 +531,15 @@ Resources:
       Bucket: !Ref letters
       PolicyDocument:
         Statement:
-          -
-            Action:
+          - Action:
               - 's3:PutObject'
             Effect: Allow
             Resource:
-              Fn::Join:
-                - ""
-                -
-                  - "arn:aws:s3:::"
-                  -
-                    Ref: "letters"
-                  - "/*"
+              'Fn::Join':
+                - ''
+                - - 'arn:aws:s3:::'
+                  - Ref: letters
+                  - /*
             Principal:
               Service: ses.amazonaws.com
     Metadata:
@@ -533,6 +547,16 @@ Resources:
         id: f1f9a62e-6d71-4769-b784-3752f6d3989f
     DependsOn:
       - letters
+  allowSesInvoke:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      FunctionName: !Ref publishFn
+      Action: 'lambda:InvokeFunction'
+      Principal: ses.amazonaws.com
+      SourceAccount: !Ref 'AWS::AccountId'
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 565ed0c9-b227-4266-ab09-52d9993b10bd
 Parameters:
   CodeSourceBucket:
     Type: String
