@@ -1,0 +1,45 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1508086136000",
+      "Effect": "Allow",
+      "Action": [
+        "lambda:*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Sid": "Stmt1508086147000",
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Sid": "Stmt1508086156000",
+      "Effect": "Allow",
+      "Action": [
+        "iam:*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Sid": "Stmt1508086163000",
+      "Effect": "Allow",
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}
