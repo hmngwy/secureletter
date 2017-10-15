@@ -72,5 +72,6 @@ workflows:
     jobs:
       - build
       - upload:
-          requires: build
+          requires:
+            - build
 
