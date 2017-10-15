@@ -6,4 +6,4 @@ zip:
 	zip -r secureletter.zip .
 
 deploy:
-	aws s3 sync build/ s3://secureletter-app.us-west-2.amazonaws.com
+	aws s3 sync build/secureletter.zip s3://secureletter-app.us-west-2.amazonaws.com

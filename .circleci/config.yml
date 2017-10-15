@@ -8,10 +8,10 @@ jobs:
 
        - run:
            command: |
+             pip install --user pipenv
+             pip install --user awscli
              python3 -m venv venv
              . venv/bin/activate
-             pip install pipenv
-             pip install awscli
              pipenv install
 
        - run:

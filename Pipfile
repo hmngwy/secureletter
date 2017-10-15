@@ -7,15 +7,16 @@ name = "pypi"
 
 "python-lambda-local" = "*"
 pylint = "*"
+"boto3" = "*"
 
 
 
 
 
 [packages]
-
-"boto3" = "*"
 "python-gnupg" = "*"
+
+
 
 
 
