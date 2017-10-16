@@ -82,7 +82,6 @@ jobs:
                --parameters ParameterKey=TablePrefix,ParameterValue=$CIRCLE_BRANCH \
                --tags Key=project,Value=SecureLetter-$CIRCLE_BRANCH \
                --capabilities CAPABILITY_IAM
-             aws cloudformation wait stack-update-complete
 
 workflows:
   version: 2
