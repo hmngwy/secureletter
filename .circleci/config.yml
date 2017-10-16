@@ -64,6 +64,10 @@ jobs:
    deploy:
      <<: *defaults
      steps:
+       - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /home/circleci/project
+
        - restore_cache:
            key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
 
