@@ -489,7 +489,7 @@ Resources:
       BucketName:
         'Fn::Join':
           - '-'
-          - - letters
+          - - secureletters-posts
             - Ref: TablePrefix
 #      NotificationConfiguration:
 #        LambdaConfigurations:
