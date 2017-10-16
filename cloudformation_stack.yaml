@@ -356,6 +356,10 @@ Resources:
     Type: 'AWS::Lambda::Function'
     Properties:
       Handler: methods.register
+      Environment:
+        Variables:
+          TARGET:
+            Ref: TablePrefix
       Role:
         'Fn::GetAtt':
           - lambdaExecRole
@@ -375,6 +379,10 @@ Resources:
     Type: 'AWS::Lambda::Function'
     Properties:
       Handler: methods.subscribe
+      Environment:
+        Variables:
+          TARGET:
+            Ref: TablePrefix
       Role:
         'Fn::GetAtt':
           - lambdaExecRole
@@ -394,6 +402,10 @@ Resources:
     Type: 'AWS::Lambda::Function'
     Properties:
       Handler: methods.unsubscribe
+      Environment:
+        Variables:
+          TARGET:
+            Ref: TablePrefix
       Role:
         'Fn::GetAtt':
           - lambdaExecRole
@@ -413,6 +425,10 @@ Resources:
     Type: 'AWS::Lambda::Function'
     Properties:
       Handler: methods.publish
+      Environment:
+        Variables:
+          TARGET:
+            Ref: TablePrefix
       Role:
         'Fn::GetAtt':
           - lambdaExecRole
