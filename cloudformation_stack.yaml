@@ -455,7 +455,7 @@ Resources:
         'Fn::Join':
           - '-'
           - - letters
-            - '!Ref TablePrefix'
+            - Ref: TablePrefix
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 49c91f71-f848-4e61-a672-a4ffee895499
