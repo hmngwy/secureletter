@@ -289,7 +289,11 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: '1'
         WriteCapacityUnits: '1'
-      TableName: newsletters
+      TableName:
+        'Fn::Join':
+          - '-'
+          - - newsletters
+            - '!Ref TablePrefix'
       GlobalSecondaryIndexes:
         - IndexName: email-index
           KeySchema:
@@ -319,7 +323,11 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: '1'
         WriteCapacityUnits: '1'
-      TableName: subscribers
+      TableName:
+        'Fn::Join':
+          - '-'
+          - - subscribers
+            - '!Ref TablePrefix'
       GlobalSecondaryIndexes:
         - IndexName: email-index
           KeySchema:
@@ -561,4 +569,7 @@ Parameters:
   CodeSourceBucket:
     Type: String
     Default: secureletter-app
+  TablePrefix:
+    Type: String
+    Default: develop
 
