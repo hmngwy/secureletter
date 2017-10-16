@@ -363,7 +363,7 @@ Resources:
       Code:
         S3Bucket:
           Ref: CodeSourceBucket
-        S3Key: secureletter-0.0.4.zip
+        S3Key: secureletter-0.0.5.zip
       Runtime: python3.6
       Timeout: '25'
       TracingConfig:
@@ -382,7 +382,7 @@ Resources:
       Code:
         S3Bucket:
           Ref: CodeSourceBucket
-        S3Key: secureletter-0.0.4.zip
+        S3Key: secureletter-0.0.5.zip
       Runtime: python3.6
       Timeout: '25'
       TracingConfig:
@@ -401,7 +401,7 @@ Resources:
       Code:
         S3Bucket:
           Ref: CodeSourceBucket
-        S3Key: secureletter-0.0.4.zip
+        S3Key: secureletter-0.0.5.zip
       Runtime: python3.6
       Timeout: '25'
       TracingConfig:
@@ -420,7 +420,7 @@ Resources:
       Code:
         S3Bucket:
           Ref: CodeSourceBucket
-        S3Key: secureletter-0.0.4.zip
+        S3Key: secureletter-0.0.5.zip
       Runtime: python3.6
       Timeout: '25'
       TracingConfig:
