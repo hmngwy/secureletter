@@ -526,7 +526,7 @@ Resources:
             Statement:
               - Effect: Allow
                 Action: 's3:*'
-                Resource: '*'
+                Resource:
                   'Fn::GetAtt':
                     - letters
                     - Arn
