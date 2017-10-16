@@ -74,6 +74,7 @@ jobs:
                --region $AWS_DEFAULT_REGION \
                --template-url https://s3-$AWS_DEFAULT_REGION.amazonaws.com/$S3_BUCKET/cloudformation_stack.yaml \
                --parameters ParameterKey=TablePrefix,ParameterValue=$CIRCLE_BRANCH \
+               --tags Key=project,Value=SecureLetter-$CIRCLE_BRANCH \
                --capabilities CAPABILITY_IAM
 
 workflows:
