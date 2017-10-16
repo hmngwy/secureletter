@@ -135,6 +135,10 @@ Metadata:
         'y': 250
       z: 0
       embeds: []
+      dependson:
+        - c372d324-2252-41d3-b28e-02e0622079eb
+      isrelatedto:
+        - c372d324-2252-41d3-b28e-02e0622079eb
     1d276304-f653-47c2-bef0-db7a157553a8:
       source:
         id: c372d324-2252-41d3-b28e-02e0622079eb
@@ -262,8 +266,8 @@ Metadata:
         width: 60
         height: 60
       position:
-        x: 356.72118017201564
-        'y': 377.40215160049615
+        x: 350
+        'y': 380
       z: 0
       embeds: []
       isassociatedwith:
@@ -271,6 +275,23 @@ Metadata:
     2dabcb1f-e833-4817-b5bb-2b9a5265b739:
       source:
         id: 565ed0c9-b227-4266-ab09-52d9993b10bd
+      target:
+        id: c372d324-2252-41d3-b28e-02e0622079eb
+      z: 11
+    4220955e-47fe-4dc7-bf45-1b7be65b09e0:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 450
+        'y': 380
+      z: 0
+      embeds: []
+      isassociatedwith:
+        - c372d324-2252-41d3-b28e-02e0622079eb
+    0830472a-8b88-4947-966b-fa406dde3428:
+      source:
+        id: 4220955e-47fe-4dc7-bf45-1b7be65b09e0
       target:
         id: c372d324-2252-41d3-b28e-02e0622079eb
       z: 11
@@ -593,6 +614,16 @@ Resources:
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 565ed0c9-b227-4266-ab09-52d9993b10bd
+  allowS3Invoke:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      FunctionName: !Ref publishFn
+      Action: 'lambda:InvokeFunction'
+      Principal: s3.amazonaws.com
+      SourceAccount: !Ref 'AWS::AccountId'
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 4220955e-47fe-4dc7-bf45-1b7be65b09e0
 Parameters:
   CodeSourceBucket:
     Type: String
