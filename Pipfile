@@ -9,6 +9,7 @@ name = "pypi"
 pylint = "*"
 "boto3" = "*"
 bumpversion = "*"
+awscli = "*"
 
 
 
@@ -16,6 +17,7 @@ bumpversion = "*"
 
 [packages]
 "python-gnupg" = "*"
+
 
 
 
