@@ -17,9 +17,10 @@ jobs:
            command: |
              export PATH="$HOME/.local/bin:$PATH"
              pip install --user pipenv
+             pip install --user awscli
              python3 -m venv venv
              . venv/bin/activate
-             pipenv install
+             pipenv install --dev
 
        - run:
            name: Build Zip
@@ -41,6 +42,7 @@ jobs:
            paths:
              - dist/secureletter-0.0.5.zip
              - cloudformation_stack.yaml
+             - Pipfile.lock
 
    upload:
      <<: *defaults
