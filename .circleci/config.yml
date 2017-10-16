@@ -34,6 +34,8 @@ jobs:
            key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
            paths:
              - venv
+             - /home/circleci/.local
+
        - persist_to_workspace:
            root: /home/circleci/project
            paths:
@@ -47,28 +49,26 @@ jobs:
           # Must be absolute path or relative path from working_directory
           at: /home/circleci/project
 
-       - run:
-           name: Prepare
-           command: |
-             sudo apt-get update && sudo apt-get install -y awscli
+       - restore_cache:
+           key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
 
        - run:
            name: Deploy Resources to S3
            command: |
+             export PATH="$HOME/.local/bin:$PATH"
              aws s3 cp dist/secureletter-0.0.5.zip s3://$S3_BUCKET/
              aws s3 cp cloudformation_stack.yaml s3://$S3_BUCKET/
 
    deploy:
      <<: *defaults
      steps:
-       - run:
-           name: Prepare
-           command: |
-             sudo apt-get update && sudo apt-get install -y awscli
+       - restore_cache:
+           key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
 
        - run:
            name: Update Cloudformation Stack
            command: |
+             export PATH="$HOME/.local/bin:$PATH"
              aws cloudformation update-stack \
                --stack-name $STACK_NAME-$CIRCLE_BRANCH \
                --region $AWS_DEFAULT_REGION \
