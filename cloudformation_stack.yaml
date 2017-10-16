@@ -472,8 +472,8 @@ Resources:
             - Ref: TablePrefix
       NotificationConfiguration:
         LambdaConfigurations:
-          Event: 's3:ObjectCreated:*'
-          Function: !Ref publishFn
+          - Event: 's3:ObjectCreated:*'
+          - Function: !Ref publishFn
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 49c91f71-f848-4e61-a672-a4ffee895499
