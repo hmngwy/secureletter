@@ -477,6 +477,8 @@ Resources:
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 49c91f71-f848-4e61-a672-a4ffee895499
+    DependsOn:
+      - publishFn
   lambdaExecRole:
     Type: 'AWS::IAM::Role'
     Metadata:
