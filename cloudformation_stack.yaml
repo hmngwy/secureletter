@@ -450,7 +450,12 @@ Resources:
         id: a8a91a9e-c007-4cf3-b347-354828389d99
   letters:
     Type: 'AWS::S3::Bucket'
-    Properties: {}
+    Properties:
+      BucketName:
+        'Fn::Join':
+          - '-'
+          - - letters
+            - '!Ref TablePrefix'
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 49c91f71-f848-4e61-a672-a4ffee895499
