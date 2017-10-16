@@ -491,13 +491,13 @@ Resources:
           - '-'
           - - letters
             - Ref: TablePrefix
-      NotificationConfiguration:
-        LambdaConfigurations:
-          - Event: 's3:ObjectCreated:*'
-            Function:
-              'Fn::GetAtt':
-                - publishFn
-                - Arn
+#      NotificationConfiguration:
+#        LambdaConfigurations:
+#          - Event: 's3:ObjectCreated:*'
+#            Function:
+#              'Fn::GetAtt':
+#                - publishFn
+#                - Arn
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 49c91f71-f848-4e61-a672-a4ffee895499
@@ -614,16 +614,16 @@ Resources:
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 565ed0c9-b227-4266-ab09-52d9993b10bd
-  allowS3Invoke:
-    Type: 'AWS::Lambda::Permission'
-    Properties:
-      FunctionName: !Ref publishFn
-      Action: 'lambda:InvokeFunction'
-      Principal: s3.amazonaws.com
-      SourceAccount: !Ref 'AWS::AccountId'
-    Metadata:
-      'AWS::CloudFormation::Designer':
-        id: 4220955e-47fe-4dc7-bf45-1b7be65b09e0
+#  allowS3Invoke:
+#    Type: 'AWS::Lambda::Permission'
+#    Properties:
+#      FunctionName: !Ref publishFn
+#      Action: 'lambda:InvokeFunction'
+#      Principal: s3.amazonaws.com
+#      SourceAccount: !Ref 'AWS::AccountId'
+#    Metadata:
+#      'AWS::CloudFormation::Designer':
+#        id: 4220955e-47fe-4dc7-bf45-1b7be65b09e0
 Parameters:
   CodeSourceBucket:
     Type: String
