@@ -293,7 +293,7 @@ Resources:
         'Fn::Join':
           - '-'
           - - newsletters
-            - '!Ref TablePrefix'
+            - Ref: TablePrefix
       GlobalSecondaryIndexes:
         - IndexName: email-index
           KeySchema:
@@ -327,7 +327,7 @@ Resources:
         'Fn::Join':
           - '-'
           - - subscribers
-            - '!Ref TablePrefix'
+            - Ref: TablePrefix
       GlobalSecondaryIndexes:
         - IndexName: email-index
           KeySchema:
