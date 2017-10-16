@@ -70,7 +70,7 @@ jobs:
            name: Update Cloudformation Stack
            command: |
              aws cloudformation update-stack \
-               --stack-name "$STACK_NAME-{{ .Branch }}" \
+               --stack-name $STACK_NAME-{{ .Branch }} \
                --region $AWS_DEFAULT_REGION \
                --template-url https://s3-$AWS_DEFAULT_REGION.amazonaws.com/$S3_BUCKET/cloudformation_stack.yaml \
                --capabilities CAPABILITY_IAM
