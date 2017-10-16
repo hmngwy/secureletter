@@ -86,6 +86,3 @@ workflows:
       - deploy:
           requires:
             - upload
-          filters:
-            branches:
-              only: master
