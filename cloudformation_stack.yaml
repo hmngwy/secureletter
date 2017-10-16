@@ -444,8 +444,6 @@ Resources:
     Metadata:
       'AWS::CloudFormation::Designer':
         id: c372d324-2252-41d3-b28e-02e0622079eb
-    DependsOn:
-      - letters
   registerSESProxy:
     Type: 'AWS::SNS::Topic'
     Properties: {}
