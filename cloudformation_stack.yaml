@@ -471,7 +471,7 @@ Resources:
           - - letters
             - Ref: TablePrefix
       NotificationConfiguration:
-        LambdaConfigurations:
+        LambdaConfiguration:
           - Event: 's3:ObjectCreated:*'
           - Function: !Ref publishFn
     Metadata:
