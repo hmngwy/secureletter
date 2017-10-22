@@ -1,6 +1,7 @@
 import email
 import json
 import os
+import time
 from email.utils import parseaddr
 
 import boto3
@@ -9,6 +10,9 @@ from boto3.dynamodb.conditions import Attr, Key
 from decorators import authenticate
 from decorators import get_ses_message
 from decorators import is_not_blocked
+
+
+import helpers
 
 
 @get_ses_message(ses_from='SNS')
@@ -73,14 +77,15 @@ def register(event, context, *args, **kwargs):
     ses_message = kwargs.get('ses_message')
     mail = kwargs.get('mail')
 
+    sender = parseaddr(verified.username)[1]
+
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table(os.environ.get(
         'DDB_NEWSLETTERS_TABLE', 'newsletters-develop'))
 
     response = table.query(
         IndexName='email-index',
-        KeyConditionExpression=Key('email').eq(
-            parseaddr(verified.username)[1])
+        KeyConditionExpression=Key('email').eq(sender)
     )
 
     if response['Count']:
@@ -91,9 +96,17 @@ def register(event, context, *args, **kwargs):
             'fingerprint': verified.fingerprint,
             'username': verified.username,
             'created_on': int(time.time()),
-            'email': parseaddr(verified.username)[1]
+            'email': sender
         }
     )
+
+    helpers.send_email(
+        'SecureLetter Registration Successful',
+        'People can subscribe to your Newsletter by sending an ' +
+        'email to subscribe@ with your full GPG Public Key Fingerprint ' +
+        'in the email subject. \n\n ' +
+        'You are registered as ' + verified.fingerprint,
+        sender)
 
     return 'SIGNATUREVALID_REGISTERED '
 
