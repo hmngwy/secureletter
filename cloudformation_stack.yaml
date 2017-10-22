@@ -308,6 +308,8 @@ Metadata:
       embeds: []
       isassociatedwith:
         - 0c923395-a230-4868-b898-a4c5eb15ec4d
+      isrelatedto:
+        - 452aee17-84a6-4d6b-bc6e-d5c1ebead8d4
     6f18f5b2-45cc-48f2-af99-280bac6ab7c1:
       source:
         id: f990a42a-7362-4c4e-8800-e95b62081d13
@@ -325,6 +327,8 @@ Metadata:
       embeds: []
       isassociatedwith:
         - 951b56ec-5949-4635-bbe8-f39ac7ba9eea
+      isrelatedto:
+        - d49d8fd2-aa77-40f3-a66a-4c0236f0b556
     40bee702-3433-4bab-b8ca-84235295eb8e:
       source:
         id: 64bd1f48-ffcd-43f2-ad89-f995466b0a30
@@ -667,7 +671,7 @@ Resources:
       FunctionName: !Ref registerFn
       Action: 'lambda:InvokeFunction'
       Principal: sns.amazonaws.com
-      SourceAccount: !Ref 'AWS::AccountId'
+      SourceArn: !Ref registerSESProxy
     Metadata:
       'AWS::CloudFormation::Designer':
         id: f990a42a-7362-4c4e-8800-e95b62081d13
@@ -677,7 +681,7 @@ Resources:
       FunctionName: !Ref subscribeFn
       Action: 'lambda:InvokeFunction'
       Principal: sns.amazonaws.com
-      SourceAccount: !Ref 'AWS::AccountId'
+      SourceArn: !Ref subscribeSESProxy
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 64bd1f48-ffcd-43f2-ad89-f995466b0a30
@@ -687,7 +691,7 @@ Resources:
       FunctionName: !Ref unsubscribeFn
       Action: 'lambda:InvokeFunction'
       Principal: sns.amazonaws.com
-      SourceAccount: !Ref 'AWS::AccountId'
+      SourceArn: !Ref unsubscribeSESProxy
     Metadata:
       'AWS::CloudFormation::Designer':
         id: e1a92916-c3e2-44b6-8e12-1cbb72b72f1c
