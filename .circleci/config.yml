@@ -29,7 +29,7 @@ jobs:
              mkdir dist
              cp methods.py build/
              cp -R venv/lib/python3.6/site-packages/* build/
-             cd build; zip -r ../dist/secureletter-0.0.9.zip .
+             cd build; chmod -R u=rwx,go=r .; zip -r ../dist/secureletter-0.0.9.zip .
 
        - save_cache:
            key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
