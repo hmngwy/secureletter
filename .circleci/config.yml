@@ -31,8 +31,8 @@ jobs:
              cp -R venv/lib/python3.6/site-packages/* build/
              cd build; chmod -R u=rwx,go=r .; zip -r ../dist/secureletter-0.0.10.zip .
 
-      - store_artifacts:
-          path: dist/secureletter-0.0.10.zip
+       - store_artifacts:
+           path: dist/secureletter-0.0.10.zip
 
        - save_cache:
            key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
