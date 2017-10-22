@@ -20,7 +20,7 @@ jobs:
              pip install --user awscli
              python3 -m venv venv
              . venv/bin/activate
-             pipenv install --dev
+             pipenv install
 
        - run:
            name: Build Zip
