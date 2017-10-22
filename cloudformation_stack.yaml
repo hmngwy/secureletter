@@ -154,6 +154,8 @@ Metadata:
         'y': 140
       z: 0
       embeds: []
+      isrelatedto:
+        - 49c91f71-f848-4e61-a672-a4ffee895499
     dfd764aa-bfef-451b-a9ea-f77d536ee12a:
       size:
         width: 60
@@ -294,6 +296,57 @@ Metadata:
         id: 4220955e-47fe-4dc7-bf45-1b7be65b09e0
       target:
         id: c372d324-2252-41d3-b28e-02e0622079eb
+      z: 11
+    f990a42a-7362-4c4e-8800-e95b62081d13:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: -100
+        'y': 180
+      z: 0
+      embeds: []
+      isassociatedwith:
+        - 0c923395-a230-4868-b898-a4c5eb15ec4d
+    6f18f5b2-45cc-48f2-af99-280bac6ab7c1:
+      source:
+        id: f990a42a-7362-4c4e-8800-e95b62081d13
+      target:
+        id: 0c923395-a230-4868-b898-a4c5eb15ec4d
+      z: 13
+    64bd1f48-ffcd-43f2-ad89-f995466b0a30:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: -100
+        'y': 250
+      z: 0
+      embeds: []
+      isassociatedwith:
+        - 951b56ec-5949-4635-bbe8-f39ac7ba9eea
+    40bee702-3433-4bab-b8ca-84235295eb8e:
+      source:
+        id: 64bd1f48-ffcd-43f2-ad89-f995466b0a30
+      target:
+        id: 951b56ec-5949-4635-bbe8-f39ac7ba9eea
+      z: 11
+    e1a92916-c3e2-44b6-8e12-1cbb72b72f1c:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: -100
+        'y': 340
+      z: 0
+      embeds: []
+      isassociatedwith:
+        - 6675595d-5b9c-419e-a1bc-36c9d6f963c9
+    34f281c7-cf42-4b88-be0e-0db9c356bccc:
+      source:
+        id: e1a92916-c3e2-44b6-8e12-1cbb72b72f1c
+      target:
+        id: 6675595d-5b9c-419e-a1bc-36c9d6f963c9
       z: 11
 Resources:
   newslettersTable:
@@ -491,18 +544,9 @@ Resources:
           - '-'
           - - secureletter-posts
             - Ref: TablePrefix
-#      NotificationConfiguration:
-#        LambdaConfigurations:
-#          - Event: 's3:ObjectCreated:*'
-#            Function:
-#              'Fn::GetAtt':
-#                - publishFn
-#                - Arn
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 49c91f71-f848-4e61-a672-a4ffee895499
-#    DependsOn:
-#      - publishFn
   lambdaExecRole:
     Type: 'AWS::IAM::Role'
     Metadata:
@@ -617,16 +661,36 @@ Resources:
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 565ed0c9-b227-4266-ab09-52d9993b10bd
-#  allowS3Invoke:
-#    Type: 'AWS::Lambda::Permission'
-#    Properties:
-#      FunctionName: !Ref publishFn
-#      Action: 'lambda:InvokeFunction'
-#      Principal: s3.amazonaws.com
-#      SourceAccount: !Ref 'AWS::AccountId'
-#    Metadata:
-#      'AWS::CloudFormation::Designer':
-#        id: 4220955e-47fe-4dc7-bf45-1b7be65b09e0
+  allowSnsInvokeRegisterFn:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      FunctionName: !Ref registerFn
+      Action: 'lambda:InvokeFunction'
+      Principal: sns.amazonaws.com
+      SourceAccount: !Ref 'AWS::AccountId'
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: f990a42a-7362-4c4e-8800-e95b62081d13
+  allowSnsInvokeSubscribeFn:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      FunctionName: !Ref subscribeFn
+      Action: 'lambda:InvokeFunction'
+      Principal: sns.amazonaws.com
+      SourceAccount: !Ref 'AWS::AccountId'
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 64bd1f48-ffcd-43f2-ad89-f995466b0a30
+  allowSnsInvokeUnsubscribeFn:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      FunctionName: !Ref unsubscribeFn
+      Action: 'lambda:InvokeFunction'
+      Principal: sns.amazonaws.com
+      SourceAccount: !Ref 'AWS::AccountId'
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: e1a92916-c3e2-44b6-8e12-1cbb72b72f1c
 Parameters:
   CodeSourceBucket:
     Type: String
