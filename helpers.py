@@ -1,5 +1,7 @@
 import json
 
+from messages import M
+
 import boto3
 from botocore.exceptions import ClientError
 
@@ -35,6 +37,12 @@ def send_email(subject, msg, recipient):
     else:
         print("Email sent! Message ID:"),
         print(response['ResponseMetadata']['RequestId'])
+
+
+def send_message(tag, recipient, subject_vars={}, body_vars={}):
+    send_email(M.get(tag)['subject'].format(**subject_vars),
+               M.get(tag)['body'].format(**body_vars),
+               recipient)
 
 
 def _get_body(msg):
