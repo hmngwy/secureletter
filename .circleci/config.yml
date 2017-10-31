@@ -31,10 +31,10 @@ jobs:
              cp helpers.py build/
              cp decorators.py build/
              cp -R venv/lib/python3.6/site-packages/* build/
-             cd build; chmod -R u=rwx,go=r .; zip -r ../dist/secureletter-0.0.11.zip .
+             cd build; chmod -R u=rwx,go=r .; zip -r ../dist/secureletter-0.0.12.zip .
 
        - store_artifacts:
-           path: dist/secureletter-0.0.11.zip
+           path: dist/secureletter-0.0.12.zip
 
        - save_cache:
            key: deps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
@@ -45,7 +45,7 @@ jobs:
        - persist_to_workspace:
            root: /home/circleci/project
            paths:
-             - dist/secureletter-0.0.11.zip
+             - dist/secureletter-0.0.12.zip
              - cloudformation_stack.yaml
              - Pipfile.lock
 
@@ -63,7 +63,7 @@ jobs:
            name: Deploy Resources to S3
            command: |
              export PATH="$HOME/.local/bin:$PATH"
-             aws s3 cp dist/secureletter-0.0.11.zip s3://$S3_BUCKET/
+             aws s3 cp dist/secureletter-0.0.12.zip s3://$S3_BUCKET/
              aws s3 cp cloudformation_stack.yaml s3://$S3_BUCKET/
 
    deploy:
