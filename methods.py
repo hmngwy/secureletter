@@ -24,8 +24,8 @@ def unsubscribe(event, context, ses_message):
     newsletter_fp = msg['Subject'].replace(' ', '')
 
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table(os.environ.get(
-        'DDB_SUBSCRIBERS_TABLE', 'secureletter-subscribers-develop'))
+    table = dynamodb.Table('secureletter-subscribers-' +
+                           os.environ.get('TARGET', 'develop'))
     table.delete_item(
         Key={'pair': sender + '-' + newsletter_fp}
     )
@@ -43,15 +43,15 @@ def subscribe(event, context, ses_message):
     newsletter_fp = msg['Subject'].replace(' ', '')
 
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table(os.environ.get(
-        'DDB_NEWSLETTERS_TABLE', 'secureletter-newsletters-develop'))
+    table = dynamodb.Table('secureletter-newsletters-' +
+                           os.environ.get('TARGET', 'develop'))
     response = table.get_item(
         Key={'fingerprint': newsletter_fp}
     )
     if 'Item' in response:
         # Newsletter exists
-        table = dynamodb.Table(os.environ.get(
-            'DDB_SUBSCRIBERS_TABLE', 'secureletter-subscribers-develop'))
+        table = dynamodb.Table('secureletter-subscribers-'
+                               + os.environ.get('TARGET', 'develop'))
         response = table.get_item(
             Key={'pair': sender + '-' + msg['Subject'].replace(' ', '')}
         )
@@ -92,8 +92,8 @@ def register(event, context, *args, **kwargs):
     sender = parseaddr(verified.username)[1]
 
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table(os.environ.get(
-        'DDB_NEWSLETTERS_TABLE', 'secureletter-newsletters-develop'))
+    table = dynamodb.Table('secureletter-newsletters-' +
+                           os.environ.get('TARGET', 'develop'))
 
     response = table.query(
         IndexName='email-index',

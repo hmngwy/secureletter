@@ -84,8 +84,8 @@ def authenticate(content_from='inline', fingerprint_from='email_ref'):
                 from email.utils import parseaddr
 
                 dynamodb = boto3.resource('dynamodb')
-                table = dynamodb.Table(os.environ.get(
-                    'DDB_NEWSLETTERS_TABLE', 'secureletter-newsletters-develop'))
+                table = dynamodb.Table('secureletter-newsletters-' +
+                                       os.environ.get('TARGET', 'develop'))
 
                 response = table.query(
                     IndexName='email-index',
