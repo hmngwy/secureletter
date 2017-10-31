@@ -605,7 +605,12 @@ Resources:
             Statement:
               - Effect: Allow
                 Action: 'logs:*'
-                Resource: '*'
+                Resource:
+                  'Fn::Join':
+                    - ''
+                    - - 'arn:aws:logs:us-west-2:'
+                      - !Ref 'AWS::AccountId'
+                      - ':log-group:/aws/lambda/SecureLetter-*'
         - PolicyName: SESSEndAccess
           PolicyDocument:
             Version: 2012-10-17
