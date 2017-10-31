@@ -372,7 +372,7 @@ Resources:
       TableName:
         'Fn::Join':
           - '-'
-          - - newsletters
+          - - secureletter-newsletters
             - Ref: TablePrefix
       GlobalSecondaryIndexes:
         - IndexName: email-index
@@ -406,7 +406,7 @@ Resources:
       TableName:
         'Fn::Join':
           - '-'
-          - - subscribers
+          - - secureletter-subscribers
             - Ref: TablePrefix
       GlobalSecondaryIndexes:
         - IndexName: email-index
@@ -580,12 +580,12 @@ Resources:
                   'Fn::GetAtt':
                     - letters
                     - Arn
-        - PolicyName: XrayFullAccess
+        - PolicyName: XrayWriteAccess
           PolicyDocument:
             Version: 2012-10-17
             Statement:
               - Effect: Allow
-                Action: 'xray:*'
+                Action: 'xray:Put*'
                 Resource: '*'
         - PolicyName: DDBFullAccess
           PolicyDocument:
@@ -593,7 +593,12 @@ Resources:
             Statement:
               - Effect: Allow
                 Action: 'dynamodb:*'
-                Resource: '*'
+                Resource:
+                  'Fn::Join':
+                    - ''
+                    - - 'arn:aws:dynamodb:us-west-2:'
+                      - !Ref 'AWS::AccountId'
+                      - ':table/secureletter-*'
         - PolicyName: CloudWatchFullAccess
           PolicyDocument:
             Version: 2012-10-17
