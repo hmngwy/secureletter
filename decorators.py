@@ -96,9 +96,9 @@ def authenticate(content_from='inline', fingerprint_from='email_ref'):
                 if not response['Count']:
                     return 'NOT_REGISTERED'
                 else:
-                    key = response['Items'][0]['fingerprint']
+                    key = response['Items'][0]['fingerprint'].replace(' ', '')
             else:
-                key = b['Subject'].strip()
+                key = b['Subject'].strip().replace(' ', '')
 
             import gnupg
             from tempfile import TemporaryDirectory
