@@ -346,6 +346,8 @@ Metadata:
       embeds: []
       isassociatedwith:
         - 6675595d-5b9c-419e-a1bc-36c9d6f963c9
+      isrelatedto:
+        - a8a91a9e-c007-4cf3-b347-354828389d99
     34f281c7-cf42-4b88-be0e-0db9c356bccc:
       source:
         id: e1a92916-c3e2-44b6-8e12-1cbb72b72f1c
@@ -584,6 +586,13 @@ Resources:
             Statement:
               - Effect: Allow
                 Action: 'xray:*'
+                Resource: '*'
+        - PolicyName: DDBFullAccess
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: 'dynamodb:*'
                 Resource: '*'
   registerSnsSub:
     Type: 'AWS::SNS::Subscription'
