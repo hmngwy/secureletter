@@ -594,6 +594,20 @@ Resources:
               - Effect: Allow
                 Action: 'dynamodb:*'
                 Resource: '*'
+        - PolicyName: CloudWatchFullAccess
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: 'logs:*'
+                Resource: '*'
+        - PolicyName: SESSEndAccess
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: 'ses:SendEmail'
+                Resource: '*'
   registerSnsSub:
     Type: 'AWS::SNS::Subscription'
     Properties:
