@@ -30,6 +30,7 @@ jobs:
              cp methods.py build/
              cp helpers.py build/
              cp decorators.py build/
+             cp messages.py build/
              cp -R venv/lib/python3.6/site-packages/* build/
              cd build; chmod -R u=rwx,go=r .; zip -r ../dist/secureletter-0.0.12.zip .
 
