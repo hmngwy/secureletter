@@ -109,7 +109,7 @@ def authenticate(content_from='inline', fingerprint_from='email_ref'):
                 print('created temporary directory', tmpdir)
 
                 gpg = gnupg.GPG(gnupghome=tmpdir)
-                import_res = gpg.recv_keys('keyserver.ubuntu.com', key)
+                import_res = gpg.recv_keys('keys.gnupg.net', key)
 
                 if not import_res.fingerprints:
                     return 'KEY_NOT_FOUND ' + key
