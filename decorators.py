@@ -38,6 +38,9 @@ def authenticate(content_from='inline', fingerprint_from='email_ref'):
     def decorator(met):
         def wrapper(event, context, ses_message):
 
+            if os.environ['TARGET'] == 'develop':
+                print(ses_message)
+
             if content_from == 'inline':
                 content = ses_message['content']
                 b = email.message_from_string(content)
