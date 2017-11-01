@@ -1,8 +1,8 @@
 import email
 import os
+import json
 
 from helpers import _is_blocked
-from helpers import _get_ses_from_sns
 from helpers import _get_signature
 from helpers import _get_body
 
@@ -22,8 +22,11 @@ def get_ses_message(ses_from='SNS'):
     def decorator(met):
         def wrapper(event, context):
 
+            if os.environ['TARGET'] == 'develop':
+                print(json.dumps(event))
+
             if ses_from == 'SNS':
-                ses_message = _get_ses_from_sns(event)
+                ses_message = json.loads(event['Records'][0]['Sns']['Message'])
             else:
                 ses_message = event['Records'][0]['ses']
 
@@ -37,9 +40,6 @@ def get_ses_message(ses_from='SNS'):
 def authenticate(content_from='inline', fingerprint_from='email_ref'):
     def decorator(met):
         def wrapper(event, context, ses_message):
-
-            if os.environ['TARGET'] == 'develop':
-                print(ses_message)
 
             if content_from == 'inline':
                 content = ses_message['content']
