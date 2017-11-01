@@ -82,7 +82,7 @@ def subscribe(event, context, ses_message):
 
 @get_ses_message(ses_from='SNS')
 @is_not_blocked
-@authenticate(fingerprint_from='subject')
+@authenticate(content_from='inline', fingerprint_from='subject')
 def register(event, context, *args, **kwargs):
 
     verified = kwargs.get('verified')
@@ -121,10 +121,13 @@ def register(event, context, *args, **kwargs):
 
 @get_ses_message(ses_from='SES')
 @is_not_blocked
-@authenticate(content_from='s3')
+@authenticate(content_from='s3', fingerprint_from='email_ref')
 def publish(event, context, *args, **kwargs):
     verified = kwargs.get('verified')
     ses_message = kwargs.get('ses_message')
     mail = kwargs.get('mail')
+
+    # get list of subscribers
+    # for each subscriber queue verified email body
 
     return 'QUEUE_EMAILS'
