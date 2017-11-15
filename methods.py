@@ -1,57 +1,52 @@
+"""AWS Lambda handlers."""
 import email
-import json
 import os
 import time
-from email.utils import parseaddr
-
-import boto3
-from boto3.dynamodb.conditions import Attr, Key
 
 from decorators import authenticate
 from decorators import get_ses_message
 from decorators import is_not_blocked
 
-import helpers
 from helpers import send_message
+from helpers import get_sender_address
+from helpers import get_address_from_gpg_username
+from helpers import get_fingerprint_from_subject
+from helpers import get_ddb_table
+from helpers import create_new_email
+
+TARGET = os.environ.get('TARGET', 'develop')
 
 
 @get_ses_message(ses_from='SNS')
 @is_not_blocked
-def unsubscribe(event, context, ses_message):
-
+def unsubscribe(event, context, ses_message):  # pylint: disable=W0613
+    """Unsubscribe a user from a newsletter."""
     msg = email.message_from_string(ses_message['content'])
-    sender = parseaddr(msg['From'])[1]
-    newsletter_fp = msg['Subject'].replace(' ', '')
+    sender = get_sender_address(msg)
+    newsletter_fp = get_fingerprint_from_subject(msg)
 
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('secureletter-subscribers-' +
-                           os.environ.get('TARGET', 'develop'))
-    table.delete_item(
-        Key={'pair': sender + '-' + newsletter_fp}
-    )
+    table = get_ddb_table('secureletter-subscribers-' + TARGET)
+    table.delete_item(Key={'pair': sender + '-' + newsletter_fp})
     send_message('unsubscribe_successful', sender,
                  subject_vars={'fingerprint': newsletter_fp})  # ←
+
     return 'UNSUBSCRIBE_SUCCESFUL'
 
 
 @get_ses_message(ses_from='SNS')
 @is_not_blocked
-def subscribe(event, context, ses_message):
-
+def subscribe(event, context, ses_message):  # pylint: disable=W0613
+    """Subscribe a user to a newsletter."""
     msg = email.message_from_string(ses_message['content'])
-    sender = parseaddr(msg['From'])[1]
+    sender = get_sender_address(msg)
     newsletter_fp = msg['Subject'].replace(' ', '')
 
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('secureletter-newsletters-' +
-                           os.environ.get('TARGET', 'develop'))
-    response = table.get_item(
-        Key={'fingerprint': newsletter_fp}
-    )
+    table = get_ddb_table('secureletter-newsletters-' + TARGET)
+    response = table.get_item(Key={'fingerprint': newsletter_fp})
+
     if 'Item' in response:
         # Newsletter exists
-        table = dynamodb.Table('secureletter-subscribers-'
-                               + os.environ.get('TARGET', 'develop'))
+        table = get_ddb_table('secureletter-subscribers-' + TARGET)
         response = table.get_item(
             Key={'pair': sender + '-' + msg['Subject'].replace(' ', '')}
         )
@@ -83,17 +78,17 @@ def subscribe(event, context, ses_message):
 @get_ses_message(ses_from='SNS')
 @is_not_blocked
 @authenticate(content_from='inline', fingerprint_from='subject')
-def register(event, context, *args, **kwargs):
+def register(event, context, *args, **kwargs):  # pylint: disable=W0613
+    """Register user."""
+    from boto3.dynamodb.conditions import Key
 
     verified = kwargs.get('verified')
-    ses_message = kwargs.get('ses_message')
-    mail = kwargs.get('mail')
+    # ses_message = kwargs.get('ses_message')
+    # mail = kwargs.get('mail')
 
-    sender = parseaddr(verified.username)[1]
+    sender = get_address_from_gpg_username(verified.username)
 
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('secureletter-newsletters-' +
-                           os.environ.get('TARGET', 'develop'))
+    table = get_ddb_table('secureletter-newsletters-' + TARGET)
 
     response = table.query(
         IndexName='email-index',
@@ -122,12 +117,23 @@ def register(event, context, *args, **kwargs):
 @get_ses_message(ses_from='SES')
 @is_not_blocked
 @authenticate(content_from='s3', fingerprint_from='email_ref')
-def publish(event, context, *args, **kwargs):
+def publish(event, context, *args, **kwargs):  # pylint: disable=W0613
+    """Send out an email by a registered user."""
+    from boto3.dynamodb.conditions import Attr
     verified = kwargs.get('verified')
-    ses_message = kwargs.get('ses_message')
-    mail = kwargs.get('mail')
 
     # get list of subscribers
     # for each subscriber queue verified email body
+
+    table = get_ddb_table('secureletter-subscribers-' + TARGET)
+    response = table.scan(
+        FilterExpression=Attr('newsletter_key').eq(verified.fingerprint)
+    )
+
+    new_email = create_new_email(kwargs.get('mail'))
+
+    if response['Count']:
+        for item in response['Items']:
+            pass  # each item is a subscriber
 
     return 'QUEUE_EMAILS'

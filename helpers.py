@@ -1,4 +1,7 @@
+"""Helper methods."""
 import json
+
+from email.utils import parseaddr
 
 from messages import M
 
@@ -6,7 +9,52 @@ import boto3
 from botocore.exceptions import ClientError
 
 
-def send_email(subject, msg, recipient):
+def get_ddb_table(table):
+    """Return dynamodb table."""
+    ddb = boto3.resource('dynamodb')
+    return ddb.Table(table)
+
+
+def get_fingerprint_from_subject(message):
+    """Return Fingerprint from email subject."""
+    return message['Subject'].replace(' ', '')
+
+
+def get_sender_address(message):
+    """Return sender address from email."""
+    return parseaddr(message['From'])[1]
+
+
+def get_address_from_gpg_username(username):
+    """Return email from gpg username."""
+    return parseaddr(username)[1]
+
+
+def create_new_email(msg):
+    """Return new email from existing."""
+    parts = []
+    for part in msg.walk():
+        # multipart/* are just containers
+        if part.get_content_maintype() == 'multipart':
+            continue
+        parts.append(part)
+
+    from email.mime.multipart import MIMEMultipart
+    new_msg = MIMEMultipart('alternative')
+    for part in parts:
+        new_msg.attach(part)
+
+    return new_msg
+
+
+def send_message(tag, recipient, subject_vars=None, body_vars=None):
+    """Send a string-format-templated email."""
+    _send_email(M.get(tag)['subject'].format(**subject_vars),
+                M.get(tag)['body'].format(**body_vars),
+                recipient)
+
+
+def _send_email(subject, msg, recipient):
     client = boto3.client('ses', region_name='us-west-2')
     # Try to send the email.
     try:
@@ -32,17 +80,11 @@ def send_email(subject, msg, recipient):
             Source='noreply@manilafunctional.com'
         )
     # Display an error if something goes wrong.
-    except ClientError as e:
-        print(e.response['Error']['Message'])
+    except ClientError as error:
+        print(error.response['Error']['Message'])
     else:
-        print("Email sent! Message ID:"),
+        print("Email sent! Message ID:")
         print(response['ResponseMetadata']['RequestId'])
-
-
-def send_message(tag, recipient, subject_vars={}, body_vars={}):
-    send_email(M.get(tag)['subject'].format(**subject_vars),
-               M.get(tag)['body'].format(**body_vars),
-               recipient)
 
 
 def _get_body(msg):

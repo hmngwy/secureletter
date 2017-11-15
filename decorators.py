@@ -22,7 +22,7 @@ def get_ses_message(ses_from='SNS'):
     def decorator(met):
         def wrapper(event, context):
 
-            if os.environ['TARGET'] == 'develop':
+            if os.environ.get('TARGET', 'develop') == 'develop':
                 print(json.dumps(event))
 
             if ses_from == 'SNS':
