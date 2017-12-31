@@ -17,6 +17,8 @@ awscli = "*"
 
 [packages]
 "python-gnupg" = "*"
+fleece = "*"
+
 
 
 
