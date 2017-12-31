@@ -589,7 +589,11 @@ Resources:
             Version: 2012-10-17
             Statement:
               - Effect: Allow
-                Action: 'xray:Put*'
+                Action:
+                  - 'xray:Put*'
+                  - 'iam:Get*'
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
                 Resource: '*'
         - PolicyName: DDBFullAccess
           PolicyDocument:
