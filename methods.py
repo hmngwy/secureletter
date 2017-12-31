@@ -3,6 +3,8 @@ import email
 import os
 import time
 
+from fleece.xray import (monkey_patch_botocore_for_xray)
+
 from decorators import authenticate
 from decorators import get_ses_message
 from decorators import is_not_blocked
@@ -14,6 +16,7 @@ from helpers import get_fingerprint_from_subject
 from helpers import get_ddb_table
 from helpers import create_new_email
 
+monkey_patch_botocore_for_xray()
 TARGET = os.environ.get('TARGET', 'develop')
 
 
