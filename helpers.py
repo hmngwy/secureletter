@@ -47,6 +47,28 @@ def create_new_email(msg):
     return new_msg
 
 
+def send_letter(recipient, subject, body):
+    client = boto3.client('ses', region_name='us-west-2')
+    # Try to send the email.
+    try:
+        # Provide the contents of the email.
+        response = client.send_raw_email(
+            Source='noreply@manilafunctional.com',
+            Destinations=[
+                recipient
+            ],
+            RawMessage={
+                'Data': bytes(body)
+            }
+        )
+    # Display an error if something goes wrong.
+    except ClientError as error:
+        print(error.response['Error']['Message'])
+    else:
+        print("Email sent! Message ID:")
+        print(response['ResponseMetadata']['RequestId'])
+
+
 def send_message(tag, recipient, subject_vars=None, body_vars=None):
     """Send a string-format-templated email."""
     _send_email(M.get(tag)['subject'].format(**subject_vars),
