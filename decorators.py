@@ -46,7 +46,6 @@ def authenticate(content_from='inline', fingerprint_from='email_ref'):
                 b = email.message_from_string(content)
             else:
                 import boto3
-                import botocore
                 from botocore.exceptions import ClientError
                 bucket = 'secureletter-posts-' + \
                     os.environ.get('TARGET', 'develop')
@@ -83,7 +82,6 @@ def authenticate(content_from='inline', fingerprint_from='email_ref'):
             if fingerprint_from == 'email_ref':
                 import boto3
                 from boto3.dynamodb.conditions import Key
-                import time
                 from email.utils import parseaddr
 
                 dynamodb = boto3.resource('dynamodb')
