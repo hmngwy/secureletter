@@ -9,12 +9,12 @@ from decorators import authenticate
 from decorators import get_ses_message
 from decorators import is_not_blocked
 
+from helpers import send_letter
 from helpers import send_message
 from helpers import get_sender_address
 from helpers import get_address_from_gpg_username
 from helpers import get_fingerprint_from_subject
 from helpers import get_ddb_table
-from helpers import create_new_email
 
 monkey_patch_botocore_for_xray()
 TARGET = os.environ.get('TARGET', 'develop')
@@ -133,10 +133,8 @@ def publish(event, context, *args, **kwargs):  # pylint: disable=W0613
         FilterExpression=Attr('newsletter_key').eq(verified.fingerprint)
     )
 
-    new_email = create_new_email(kwargs.get('mail'))
-
     if response['Count']:
         for item in response['Items']:
-            pass  # each item is a subscriber
+            send_letter(item['email'], 'TEST', kwargs.get('mail'))
 
     return 'QUEUE_EMAILS'
